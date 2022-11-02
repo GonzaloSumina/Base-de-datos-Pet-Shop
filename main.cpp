@@ -2,16 +2,40 @@
 #include <string>
 
 //Inicio de sesion
-/*
-class Administrador{
-public: 
-	Producto P_general;
-};
-class Empleado{
+class Persona{
 public:
-
+	std::string Nombre_p;
+	std::string Apellido_p;
+	Persona(std::string Nombre_p, std::string Apellido_p){
+		this->Nombre_p=Nombre_p;
+		this->Apellido_p=Apellido_p;
+	}
+	const std::string get_Nombre_p(){
+		return Nombre_p;
+	}
+	const std::string get_Apellido_p(){
+		return Apellido_p;
+	}
 };
-*/
+
+class Administrador : public Persona{
+public: 
+	std::string Usuario;
+	std::string correo;
+	std::string contrasena;
+};
+class Empleado : public Persona{
+public:
+	std::string Usuario;
+	std::string correo;
+	std::string contrasena;
+};
+
+class Cliente:public Persona{
+public:
+	int compras;
+};
+
 class Mascota{
 private:
 	std::string nombreM;
@@ -39,35 +63,24 @@ public:
   	}
 };
 
-class Cliente{
-public:
-	std::string nombreC;
-	std::string apellidoC;
-	//Mascota mascota1[];
-	Cliente(std::string nombre_c, std::string apellido_c){
-		nombreC = nombre_c;
-		apellidoC = apellido_c;
-	}
-	void print(){
-    	std::cout<<nombreC<<std::endl;
-    	std::cout<<apellidoC<<std::endl;
-  	}
-  	const std::string get_nombreC(){
-  		return nombreM;
-  	}
-  	const std::string get_apellidoC(){
-  		return apellidoC;
-  	}
-};
-
 //Registro de productos
 class Alimentos{
 public:
 	std::string marca;
 	int cantidad;
+	Alimentos(std::string marca_, int cantidad_){
+		marca=marca_;
+		cantidad=cantidad_;
+	}
   	void print(){
     	std::cout<<marca<<std::endl;
     	std::cout<<cantidad<<std::endl;
+  	}
+  	const std::string get_marca(){
+  		return marca;
+  	}
+  	const int get_cantidad(){
+  		return cantidad;
   	}
 };
 
@@ -75,26 +88,46 @@ class Accesorios{
 public:
 	std::string tipo_accesorio;
 	int cantidad;
+	Accesorios(std::string tipo_accesorio_, int cantidad_){
+		tipo_accesorio=tipo_accesorio_;
+		cantidad=cantidad_;
+	}
 	void print(){
     	std::cout<<tipo_accesorio<<std::endl;
     	std::cout<<cantidad<<std::endl;
   	}
+  	const std::string get_tipo_accesorio(){
+  		return tipo_accesorio;
+  	}
+  	const int get_cantidad(){
+  		return cantidad;
+  	}
+
 };
 
 
 class Producto{
 public:
-	Alimentos C_Perros;
+	/*Alimentos C_Perros;
 	Alimentos C_Gatos;
 	Alimentos C_Roedores;
 	Alimentos C_Aves;
-	Alimentos C_Peces;
+	Alimentos C_Peces;*/
 	float precio;
 	int ID;
-
+	Producto(float precio_, int ID_){
+		precio=precio_;
+		ID=ID_;
+	}
 	void print(){
     	std::cout<<"S/ "<<precio<<std::endl;
     	std::cout<<"ID: "<<ID<<std::endl;
+  	}
+  	const float get_precio(){
+  		return precio;
+  	}
+  	const int get_ID(){
+  		return ID;
   	}
 };
 //Registro de Ventas
@@ -102,6 +135,16 @@ class Venta{
 public:
 	int fecha;
 	int total;
+	Venta(int fecha_, int total_){
+		fecha=fecha_;
+		total=total_;
+	}
+	const int get_fecha(){
+		return fecha;
+	} 
+	const int get_total(){
+		return total;
+	}
 	void print(){
 		std::cout<<fecha;
 		std::cout<<total;
@@ -112,6 +155,16 @@ class Detalle_Venta{
 public:
 	int cantidad;
 	int precio;
+	Detalle_Venta(int cantidad_, int precio_){
+		cantidad=cantidad_;
+		precio=precio_;
+	}
+	const int get_cantidad(){
+		return cantidad;
+	}
+	const int get_precio(){
+		return precio;
+	}
 	void print(){
 		std::cout<<cantidad;
 		std::cout<<precio;
@@ -121,23 +174,6 @@ public:
 
 int main() 
 {
-	std::string a;
-	Mascota animal1("Bob", 6, "PERRO");
-	animal1.print();
-	//animal1.nombre = "Bob";
-	//animal1.edad = 3;
-
-	Producto Ricocan; 
-	Ricocan.C_Perros.cantidad = 35;
-	Ricocan.C_Perros.print();
-	Ricocan.precio = 8.5;
-	Ricocan.ID = 34123457;
-  	Ricocan.print();
-  	//animal1.print();
-  	Cliente cliente1("Juan", "Palomera");
 	
-	Mascota animal2("Olaf", 4, "Gato");
-	a=animal2.get_nombreM();
-	std::cout<<a;
 	return 0;
 }
