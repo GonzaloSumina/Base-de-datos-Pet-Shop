@@ -70,7 +70,7 @@ private:
 	int edad;
 	std::string especie;
 public:
-	Mascota(std::string nombre_m, int edad_m, std::string especie_m){
+	Mascota(std::string nombre_m="", int edad_m=0, std::string especie_m=""){
 		nombreM = nombre_m;
 		edad = edad_m;
 		especie = especie_m;
@@ -91,14 +91,11 @@ public:
   	}
 };
 
-class Cliente{ //:public Persona{
+class Cliente {//:public Persona, Mascota{
 public:
 	int compras;
 	int cant_mascota;
-	Mascota *mascota;
-	void create_mascota(){
-		mascota = new Mascota [cant_mascota];
-	}
+	Mascota *mascota=new Mascota[cant_mascota];
 };
 
 //Registro de productos
@@ -146,11 +143,6 @@ public:
 
 class Producto{
 public:
-	/*Alimentos C_Perros;
-	Alimentos C_Gatos;
-	Alimentos C_Roedores;
-	Alimentos C_Aves;
-	Alimentos C_Peces;*/
 	float precio;
 	int ID;
 	Producto(float precio_, int ID_){
@@ -172,15 +164,19 @@ public:
 class Venta{
 public:
 	int fecha;
-	int total;
-	Venta(int fecha_, int total_){
+	float total;
+	Venta(int fecha_, float total_){
 		fecha=fecha_;
 		total=total_;
+	}
+	~Venta(){
+		fecha=0;
+		total=0;
 	}
 	const int get_fecha(){
 		return fecha;
 	} 
-	const int get_total(){
+	const float get_total(){
 		return total;
 	}
 	void print(){
@@ -192,15 +188,19 @@ public:
 class Detalle_Venta{	
 public:
 	int cantidad;
-	int precio;
-	Detalle_Venta(int cantidad_, int precio_){
+	float precio;
+	Detalle_Venta(int cantidad_, float precio_){
 		cantidad=cantidad_;
 		precio=precio_;
+	}
+	~Detalle_Venta(){
+		cantidad=0;
+		precio=0;
 	}
 	const int get_cantidad(){
 		return cantidad;
 	}
-	const int get_precio(){
+	const float get_precio(){
 		return precio;
 	}
 	void print(){
@@ -218,14 +218,23 @@ public:
 
 class Interfaz{
 public:
+	std::string Correo;
+	std::string Contraseña;
 	const void Menu(){
-		std::cout<<"------------------------------------------------";
-		std::cout<<"                   Menu                         ";
+		std::cout<<"|----------------------------------------------|\n";
+		std::cout<<"|              Inicio de sesion                |\n";
+		std::cout<<"|----------------------------------------------|\n";
+		std::cout<<"| Ingrese correo: ";
+		std::cin>>Correo;
+		std::cout<<"| Ingrese contraseña: ";
+		std::cin>>Contraseña;
+		std::cout<<"|----------------------------------------------|\n";
 		return;
 	}
 };
 int main() 
 {
-	
+	Interfaz x;
+	x.Menu();
 	return 0;
 }
