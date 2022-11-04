@@ -1,14 +1,14 @@
 #include <iostream>
 #include <string>
+#include <fstream>
 
-//Inicio de sesion
 class Persona{
 public:
 	std::string Nombre_p;
 	std::string Apellido_p;
-	Persona(std::string Nombre_p, std::string Apellido_p){
-		this->Nombre_p=Nombre_p;
-		this->Apellido_p=Apellido_p;
+	Persona(std::string Nombre_p_, std::string Apellido_p_){
+		Nombre_p=Nombre_p_;
+		Apellido_p=Apellido_p_;
 	}
 	const std::string get_Nombre_p(){
 		return Nombre_p;
@@ -16,25 +16,53 @@ public:
 	const std::string get_Apellido_p(){
 		return Apellido_p;
 	}
+	void create_file(){
+		std::fstream Nombre;
+		Nombre.open("Nombre", std::ios::out);
+	}
 };
 
-class Administrador : public Persona{
+class Administrador{ // : public Persona{
 public: 
 	std::string Usuario;
 	std::string correo;
 	std::string contrasena;
+	Administrador(std::string Usuario_, std::string correo_, std::string contrasena_){
+		Usuario=Usuario_;
+		correo=correo_;
+		contrasena=contrasena_;
+	}
+	const std::string get_Usuario(){
+		return Usuario;
+	}
+	const std::string get_correo(){
+		return correo;
+	}
+	const std::string get_contrasena(){
+		return contrasena;
+	}
 };
-class Empleado : public Persona{
+class Empleado { //: public Persona{
 public:
 	std::string Usuario;
 	std::string correo;
 	std::string contrasena;
+	Empleado(std::string Usuario_, std::string correo_, std::string contrasena_){
+		Usuario_=Usuario;
+		correo_=correo;
+		contrasena_=contrasena;
+	}
+	const std::string get_Usuario(){
+		return Usuario;
+	}
+	const std::string get_correo(){
+		return correo;
+	}
+	const std::string get_contrasena(){
+		return contrasena;
+	}
 };
 
-class Cliente:public Persona{
-public:
-	int compras;
-};
 
 class Mascota{
 private:
@@ -61,6 +89,16 @@ public:
   	const int get_edad(){
   		return edad;
   	}
+};
+
+class Cliente{ //:public Persona{
+public:
+	int compras;
+	int cant_mascota;
+	Mascota *mascota;
+	void create_mascota(){
+		mascota = new Mascota [cant_mascota];
+	}
 };
 
 //Registro de productos
@@ -171,7 +209,21 @@ public:
 	}
 };
 
+class Servicio{
+public:
+	bool vacunas;
+	bool baño;
+	bool diagnostico;
+};
 
+class Interfaz{
+public:
+	const void Menu(){
+		std::cout<<"------------------------------------------------";
+		std::cout<<"                   Menu                         ";
+		return;
+	}
+};
 int main() 
 {
 	
