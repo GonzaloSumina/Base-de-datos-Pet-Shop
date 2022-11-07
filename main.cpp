@@ -3,15 +3,22 @@
 #include <fstream>
 
 class Persona{
-public:
+private:
 	std::string Nombre_p;
 	std::string Apellido_p;
+public:
 	Persona(std::string Nombre_p_, std::string Apellido_p_){
 		Nombre_p=Nombre_p_;
 		Apellido_p=Apellido_p_;
 	}
+	const void set_Nombre_p(std::string Nombre_p_){
+		Nombre_p=Nombre_p_;
+	}
 	const std::string get_Nombre_p(){
 		return Nombre_p;
+	}
+	const void set_Apellido_p(std::string Apellido_p_){
+		Apellido_p=Apellido_p_;
 	}
 	const std::string get_Apellido_p(){
 		return Apellido_p;
@@ -23,10 +30,11 @@ public:
 };
 
 class Administrador{ // : public Persona{
-public: 
+private: 
 	std::string Usuario;
 	std::string correo;
 	std::string contrasena;
+public:
 	Administrador(std::string Usuario_, std::string correo_, std::string contrasena_){
 		Usuario=Usuario_;
 		correo=correo_;
@@ -35,18 +43,28 @@ public:
 	const std::string get_Usuario(){
 		return Usuario;
 	}
+	const void set_Usuario(std::string Usuario_){
+		Usuario=Usuario_;
+	}
 	const std::string get_correo(){
 		return correo;
+	}
+	const void set_correo(std::string correo_){
+		correo=correo_;
 	}
 	const std::string get_contrasena(){
 		return contrasena;
 	}
+	const void set_contrasena(std::string contrasena_){
+		contrasena=contrasena_;
+	}
 };
 class Empleado { //: public Persona{
-public:
+private:
 	std::string Usuario;
 	std::string correo;
 	std::string contrasena;
+public:
 	Empleado(std::string Usuario_, std::string correo_, std::string contrasena_){
 		Usuario_=Usuario;
 		correo_=correo;
@@ -55,18 +73,27 @@ public:
 	const std::string get_Usuario(){
 		return Usuario;
 	}
+	const void set_Usuario(std::string Usuario_){
+		Usuario=Usuario_;
+	}
 	const std::string get_correo(){
 		return correo;
+	}
+	const void set_correo(std::string correo_){
+		correo=correo_;
 	}
 	const std::string get_contrasena(){
 		return contrasena;
 	}
+	const void set_contrasena(std::string contrasena_){
+		contrasena=contrasena_;
+	}
 };
-
 
 class Mascota{
 private:
 	std::string nombreM;
+	int *fecha_nacimiento=new int [3];
 	int edad;
 	std::string especie;
 public:
@@ -83,11 +110,20 @@ public:
   	const std::string get_nombreM(){
   		return nombreM;
   	}
+  	const void set_nombreM(std::string nombreM_){
+  		nombreM= nombreM_;
+  	}
   	const std::string get_especie(){
   		return especie;
   	}
+  	const void set_especie(std::string especie_){
+  		especie= especie_;
+  	}
   	const int get_edad(){
   		return edad;
+  	}
+  	const void set_edad(int edad_){
+  		edad=edad_;
   	}
 };
 
@@ -100,9 +136,10 @@ public:
 
 //Registro de productos
 class Alimentos{
-public:
+private:
 	std::string marca;
 	int cantidad;
+public:
 	Alimentos(std::string marca_, int cantidad_){
 		marca=marca_;
 		cantidad=cantidad_;
@@ -114,14 +151,21 @@ public:
   	const std::string get_marca(){
   		return marca;
   	}
+  	const void set_marca(std::string marca_){
+  		marca=marca_;
+  	}
   	const int get_cantidad(){
   		return cantidad;
+  	}
+  	const void set_cantidad(int cantidad_){
+  		cantidad=cantidad_;
   	}
 };
 
 class Accesorios{
-public:
+private:
 	std::string tipo_accesorio;
+public:
 	int cantidad;
 	Accesorios(std::string tipo_accesorio_, int cantidad_){
 		tipo_accesorio=tipo_accesorio_;
@@ -134,15 +178,15 @@ public:
   	const std::string get_tipo_accesorio(){
   		return tipo_accesorio;
   	}
-  	const int get_cantidad(){
-  		return cantidad;
+  	const void set_tipo_accesorio(std::string tipo_accesorio_){
+  		tipo_accesorio=tipo_accesorio_;
   	}
 
 };
 
 
 class Producto{
-public:
+private:
 	float precio;
 	int ID;
 	Producto(float precio_, int ID_){
@@ -155,6 +199,9 @@ public:
   	}
   	const float get_precio(){
   		return precio;
+  	}
+  	const void set_precio(float precio_){
+  		precio=precio_;
   	}
   	const int get_ID(){
   		return ID;
@@ -210,26 +257,58 @@ public:
 };
 
 class Servicio{
-public:
+private:
 	bool vacunas;
-	bool baño;
+	bool baÃ±o;
 	bool diagnostico;
+	int calendario[7][12];
+public:
+	Servicio(){
+		vacunas=false;
+		baÃ±o=false;
+		diagnostico=false;
+	}
+
 };
 
 class Interfaz{
 public:
-	std::string Correo;
-	std::string Contraseña;
 	const void Menu(){
+		std::string Correo;
+		std::string ContraseÃ±a;
+		int option;
 		std::cout<<"|----------------------------------------------|\n";
-		std::cout<<"|              Inicio de sesion                |\n";
+		std::cout<<"|                    PetShop                   |\n";
 		std::cout<<"|----------------------------------------------|\n";
-		std::cout<<"| Ingrese correo: ";
-		std::cin>>Correo;
-		std::cout<<"| Ingrese contraseña: ";
-		std::cin>>Contraseña;
+		std::cout<<"| (1) Iniciar sesion                           |\n";
+		std::cout<<"| (2) Registrarse                              |\n";
+		std::cout<<"| (3) Salir                                    |\n";
 		std::cout<<"|----------------------------------------------|\n";
-		return;
+		std::cin>>option;
+		switch(option){
+			case 1:
+				std::cout<<"|----------------------------------------------|\n";
+				std::cout<<"|              Inicio de sesion                |\n";
+				std::cout<<"|----------------------------------------------|\n";
+				std::cout<<"| Ingrese correo o usuario: ";
+				std::cin>>Correo;
+				std::cout<<"| Ingrese contraseÃ±a: ";
+				std::cin>>ContraseÃ±a;
+				std::cout<<"|----------------------------------------------|\n";
+		        break;
+			case 2:
+				std::cout<<"|----------------------------------------------|\n";
+				std::cout<<"|                  Registrarse                 |\n";
+				std::cout<<"|----------------------------------------------|\n";
+				std::cout<<"| Ingrese correo: ";
+				std::cin>>Correo;
+				std::cout<<"| Ingrese contraseÃ±a: ";
+				std::cin>>ContraseÃ±a;
+				std::cout<<"|----------------------------------------------|\n";
+		        break;
+			case 3:
+				break;
+		}
 	}
 };
 int main() 
