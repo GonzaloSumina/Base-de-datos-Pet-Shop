@@ -23,19 +23,27 @@ public:
 	const std::string get_Apellido_p(){
 		return Apellido_p;
 	}
-	void create_file(){
-		std::fstream Nombre;
-		Nombre.open("Nombre", std::ios::out);
+	void create_file(std::string Name_,std::string LastName_, std::string Correo_, std::string Password_ ){
+		std::ofstream persona("Informacion.txt");
+		if (persona.is_open())
+	    {
+		    persona << Name_ << "\n";
+			persona << LastName_ << "\n";
+			persona << Correo_ << "\n";
+			persona << Password_ << "\n";
+		    persona.close();
+	    }
+	    else std::cout << "Unable to open file";
 	}
 };
 
-class Administrador{ // : public Persona{
+class Administrador : public Persona{
 private: 
 	std::string Usuario;
 	std::string correo;
 	std::string contrasena;
 public:
-	Administrador(std::string Usuario_, std::string correo_, std::string contrasena_){
+	Administrador(std::string Nombre_p_, std::string Apellido_p_, std::string Usuario_, std::string correo_, std::string contrasena_) : Persona(Nombre_p_, Apellido_p_){
 		Usuario=Usuario_;
 		correo=correo_;
 		contrasena=contrasena_;
@@ -59,13 +67,13 @@ public:
 		contrasena=contrasena_;
 	}
 };
-class Empleado { //: public Persona{
+class Empleado : public Persona{
 private:
 	std::string Usuario;
 	std::string correo;
 	std::string contrasena;
 public:
-	Empleado(std::string Usuario_, std::string correo_, std::string contrasena_){
+	Empleado(std::string Nombre_p_, std::string Apellido_p_, std::string Usuario_, std::string correo_, std::string contrasena_): Persona(Nombre_p_, Apellido_p_){
 		Usuario_=Usuario;
 		correo_=correo;
 		contrasena_=contrasena;
@@ -127,11 +135,16 @@ public:
   	}
 };
 
-class Cliente {//:public Persona, Mascota{
+class Cliente : public Persona{
 public:
 	int compras;
 	int cant_mascota;
 	Mascota *mascota=new Mascota[cant_mascota];
+	Cliente(std::string Nombre_p_, std::string Apellido_p_, int compras_, int cant_mascota_) : Persona(Nombre_p_, Apellido_p_){
+		compras=compras_;
+		cant_mascota=cant_mascota_;
+		mascota=nullptr;
+	}
 };
 
 //Registro de productos
@@ -259,23 +272,27 @@ public:
 class Servicio{
 private:
 	bool vacunas;
-	bool baÃ±o;
+	bool baño;
 	bool diagnostico;
 	int calendario[7][12];
 public:
 	Servicio(){
 		vacunas=false;
-		baÃ±o=false;
+		baño=false;
 		diagnostico=false;
 	}
 
 };
 
-class Interfaz{
+class Interfaz : public Persona{
 public:
+	Interfaz(std::string Nombre_p_="", std::string Apellido_p_="") : Persona(Nombre_p_, Apellido_p_){
+	}
 	const void Menu(){
 		std::string Correo;
-		std::string ContraseÃ±a;
+		std::string Contraseña;
+		std::string Name;
+		std::string LastName;
 		int option;
 		std::cout<<"|----------------------------------------------|\n";
 		std::cout<<"|                    PetShop                   |\n";
@@ -292,8 +309,8 @@ public:
 				std::cout<<"|----------------------------------------------|\n";
 				std::cout<<"| Ingrese correo o usuario: ";
 				std::cin>>Correo;
-				std::cout<<"| Ingrese contraseÃ±a: ";
-				std::cin>>ContraseÃ±a;
+				std::cout<<"| Ingrese contraseña: ";
+				std::cin>>Contraseña;
 				std::cout<<"|----------------------------------------------|\n";
 		        break;
 			case 2:
@@ -302,18 +319,25 @@ public:
 				std::cout<<"|----------------------------------------------|\n";
 				std::cout<<"| Ingrese correo: ";
 				std::cin>>Correo;
-				std::cout<<"| Ingrese contraseÃ±a: ";
-				std::cin>>ContraseÃ±a;
+				std::cout<<"| Ingrese contraseña: ";
+				std::cin>>Contraseña;
+				std::cout<<"| Ingrese Nombre: ";
+				std::cin>>Name;
+				std::cout<<"| Ingrese Apellido: ";
+				std::cin>>LastName;
 				std::cout<<"|----------------------------------------------|\n";
+				create_file(Name, LastName, Correo, Contraseña);
 		        break;
 			case 3:
 				break;
 		}
+
 	}
 };
 int main() 
 {
 	Interfaz x;
 	x.Menu();
+	//Persona a(x.)
 	return 0;
 }
