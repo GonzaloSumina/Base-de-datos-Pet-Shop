@@ -101,7 +101,7 @@ public:
 class Mascota{
 private:
 	std::string nombreM;
-	int *fecha_nacimiento=new int [3];
+	int *fecha_nacimiento;//=new int [3];
 	int edad;
 	std::string especie;
 public:
@@ -109,6 +109,7 @@ public:
 		nombreM = nombre_m;
 		edad = edad_m;
 		especie = especie_m;
+		fecha_nacimiento=new int[3];
 	}
   	void print(){
     	std::cout<<nombreM<<std::endl;
@@ -139,21 +140,45 @@ class Cliente : public Persona{
 public:
 	int compras;
 	int cant_mascota;
-	Mascota *mascota=new Mascota[cant_mascota];
+	Mascota *mascota;//=new Mascota[cant_mascota];
 	Cliente(std::string Nombre_p_, std::string Apellido_p_, int compras_, int cant_mascota_) : Persona(Nombre_p_, Apellido_p_){
 		compras=compras_;
 		cant_mascota=cant_mascota_;
-		mascota=nullptr;
+		mascota=new Mascota[cant_mascota];
 	}
 };
 
 //Registro de productos
-class Alimentos{
+class Producto{
+private:
+	float precio;
+	int ID;
+public:
+	Producto(float precio_, int ID_){
+		precio=precio_;
+		ID=ID_;
+	}
+	void print(){
+    	std::cout<<"S/ "<<precio<<std::endl;
+    	std::cout<<"ID: "<<ID<<std::endl;
+  	}
+  	const float get_precio(){
+  		return precio;
+  	}
+  	const void set_precio(float precio_){
+  		precio=precio_;
+  	}
+  	const int get_ID(){
+  		return ID;
+  	}
+};
+
+class Alimentos : public Producto{
 private:
 	std::string marca;
 	int cantidad;
 public:
-	Alimentos(std::string marca_, int cantidad_){
+	Alimentos(float precio_, int ID_, std::string marca_, int cantidad_) : Producto(precio_, ID_){
 		marca=marca_;
 		cantidad=cantidad_;
 	}
@@ -175,12 +200,12 @@ public:
   	}
 };
 
-class Accesorios{
+class Accesorios : public Producto{
 private:
 	std::string tipo_accesorio;
 public:
 	int cantidad;
-	Accesorios(std::string tipo_accesorio_, int cantidad_){
+	Accesorios(float precio_, int ID_, std::string tipo_accesorio_, int cantidad_) : Producto(precio_, ID_){
 		tipo_accesorio=tipo_accesorio_;
 		cantidad=cantidad_;
 	}
@@ -197,29 +222,6 @@ public:
 
 };
 
-
-class Producto{
-private:
-	float precio;
-	int ID;
-	Producto(float precio_, int ID_){
-		precio=precio_;
-		ID=ID_;
-	}
-	void print(){
-    	std::cout<<"S/ "<<precio<<std::endl;
-    	std::cout<<"ID: "<<ID<<std::endl;
-  	}
-  	const float get_precio(){
-  		return precio;
-  	}
-  	const void set_precio(float precio_){
-  		precio=precio_;
-  	}
-  	const int get_ID(){
-  		return ID;
-  	}
-};
 //Registro de Ventas
 class Venta{
 public:
