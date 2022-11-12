@@ -97,11 +97,26 @@ public:
 		contrasena=contrasena_;
 	}
 };
+class Fecha{
+public:
+	int *fecha;
+	int dia, mes, año;
+	Fecha(){
+		fecha=new int [3];
+		fecha=nullptr;
+	}
+	int set_fecha(){
+		fecha[0]=dia;
+		fecha[1]=mes;
+		fecha[2]=año;
+		return 0;
+	}
+};
 
 class Mascota{
 private:
 	std::string nombreM;
-	int *fecha_nacimiento;//=new int [3];
+	Fecha F ;
 	int edad;
 	std::string especie;
 public:
@@ -109,7 +124,6 @@ public:
 		nombreM = nombre_m;
 		edad = edad_m;
 		especie = especie_m;
-		fecha_nacimiento=new int[3];
 	}
   	void print(){
     	std::cout<<nombreM<<std::endl;
@@ -133,6 +147,9 @@ public:
   	}
   	const void set_edad(int edad_){
   		edad=edad_;
+  	}
+  	void set_fecha_nacimiento(){
+  		F.set_fecha();
   	}
 };
 
@@ -176,15 +193,15 @@ public:
 class Alimentos : public Producto{
 private:
 	std::string marca;
-	int cantidad;
+	int cantidad_;
 public:
 	Alimentos(float precio_, int ID_, std::string marca_, int cantidad_) : Producto(precio_, ID_){
 		marca=marca_;
-		cantidad=cantidad_;
+		cantidad_=this->cantidad_;
 	}
   	void print(){
     	std::cout<<marca<<std::endl;
-    	std::cout<<cantidad<<std::endl;
+    	std::cout<<cantidad_<<std::endl;
   	}
   	const std::string get_marca(){
   		return marca;
@@ -193,25 +210,25 @@ public:
   		marca=marca_;
   	}
   	const int get_cantidad(){
-  		return cantidad;
+  		return cantidad_;
   	}
   	const void set_cantidad(int cantidad_){
-  		cantidad=cantidad_;
+  		cantidad_=this->cantidad_;
   	}
 };
 
 class Accesorios : public Producto{
 private:
 	std::string tipo_accesorio;
+	int cantidad_;
 public:
-	int cantidad;
 	Accesorios(float precio_, int ID_, std::string tipo_accesorio_, int cantidad_) : Producto(precio_, ID_){
 		tipo_accesorio=tipo_accesorio_;
-		cantidad=cantidad_;
+		cantidad_=this->cantidad_;
 	}
 	void print(){
     	std::cout<<tipo_accesorio<<std::endl;
-    	std::cout<<cantidad<<std::endl;
+    	std::cout<<cantidad_<<std::endl;
   	}
   	const std::string get_tipo_accesorio(){
   		return tipo_accesorio;
@@ -219,30 +236,36 @@ public:
   	const void set_tipo_accesorio(std::string tipo_accesorio_){
   		tipo_accesorio=tipo_accesorio_;
   	}
+  	const int get_cantidad(){
+  		return cantidad_;
+  	}
+  	const void set_cantidad(int cantidad_){
+  		cantidad_=this->cantidad_;
+
+  	}
 
 };
 
 //Registro de Ventas
 class Venta{
-public:
-	int fecha;
+private:
 	float total;
-	Venta(int fecha_, float total_){
-		fecha=fecha_;
+	Fecha F;
+public:
+	Venta(float total_){
 		total=total_;
 	}
 	~Venta(){
-		fecha=0;
 		total=0;
 	}
-	const int get_fecha(){
-		return fecha;
-	} 
 	const float get_total(){
 		return total;
 	}
+	const void set_total(float total_){
+		total=total_;
+	}
 	void print(){
-		std::cout<<fecha;
+		//std::cout<<F.get_fecha;
 		std::cout<<total;
 	}
 };
@@ -271,20 +294,10 @@ public:
 	}
 };
 
-class Servicio{
+/*class Servicio_Calendario{
 private:
-	bool vacunas;
-	bool baño;
-	bool diagnostico;
 	int calendario[7][12];
-public:
-	Servicio(){
-		vacunas=false;
-		baño=false;
-		diagnostico=false;
-	}
-
-};
+};*/
 
 class Interfaz : public Persona{
 public:
