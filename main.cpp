@@ -3,7 +3,7 @@
 
 
 class Persona{
-private:
+protected:
 	std::string Nombre_p;
 	std::string Apellido_p;
 public:
@@ -183,7 +183,7 @@ public:
 
 //Registro de productos
 class Producto{
-private:
+protected:
 	float precio;
 	//int ID;
 public:
@@ -232,7 +232,7 @@ private:
 public:
 	Accesorios(float precio_=0/*, int ID_=0*/, std::string tipo_accesorio_="", int cantidad_=0) : Producto(precio_/*, ID_*/){
 		tipo_accesorio=tipo_accesorio_;
-		cantidad_=this->cantidad_;
+		this->cantidad_=cantidad_;
 	}
 	void print(){
     	std::cout<<tipo_accesorio<<std::endl;
@@ -248,7 +248,7 @@ public:
   		return cantidad_;
   	}
   	void set_cantidad(int cantidad_){
-  		cantidad_=this->cantidad_;
+  		this->cantidad_=cantidad_;
 
   	}
 
@@ -298,8 +298,11 @@ public:
 	int cont_Em;
 	int cont1, cont2;
 	bool Tipo_Ad;
-  bool loop_;
+  	bool loop_;
 	int option, option2, option3;
+	std::string producto_x;
+	std::string producto_y;
+	int cant_prod;
 	Interfaz(std::string Nombre_p_="",std::string Apellido_p_= "") : Persona(Nombre_p_, Apellido_p_){
 		cont_Ad=3;
 		cont_Ac=0;
@@ -308,13 +311,13 @@ public:
 		cont2=0;
 		Al=nullptr;
 		Ac=nullptr;
+		Em=nullptr;
+		Ad=nullptr;
+		Cl=nullptr;
 		Al=new Alimentos [cont_Al];
 		Ac=new Accesorios [cont_Ac];
-		Ad=nullptr;
 		Ad=new Administrador [cont_Ad];
-		Em=nullptr;
 		Em=new Empleado[8];
-		Cl=nullptr;
 		Cl=new Cliente[10];
 	}
 	const void Menu(){
@@ -449,28 +452,27 @@ public:
 							else if(option3==2){
 								for (int i=0; i<cont_Al; ++i){
 									std::cout<<"===============================================\n";
-									std::cout<<" "<<i+1<<" | \t\t"<<Al[i].get_marca()<<"\t\t\n";
+									std::cout<<" "<<i+1<<" | \t\t"<<Al[i].get_marca()<<"\t"<<Ac[i].get_cantidad()<<"\t\t\n";
 								}
 							}
 						}
 						else if (option2==2){
-							int adicion;
 							if(option3==1){
 								std::cout<<"Ingrese la cantidad de productos: ";
-								std::cin>>adicion;
-								cont_Ac+=adicion;
-								std::string producto_x;
+								std::cin>>cont_Ac;
 								for (int i=0; i<cont_Ac; ++i){
 									std::cout<<cont_Ac;
 									std::cout<<"Ingrese el/los producto(s): ";
 									std::cin>>producto_x;
-									Ac[i].set_tipo_accesorio(producto_x);								
+									std::cout<<"Ingrese la cantidad: ";
+									std::cin>>cant_prod;
+									Ac[i].set_tipo_accesorio(producto_x);
+									Ac[i].set_cantidad(cant_prod);								
 								}
 							}
 							else if(option3==2){
 								std::cout<<"Ingrese la cantidad de productos: ";
 								std::cin>>cont_Al;
-								std::string producto_y;
 								for (int i=0; i<cont_Al; ++i){
 									std::cout<<cont_Al;
 									std::cout<<"Ingrese el/los producto(s): ";
@@ -525,15 +527,15 @@ public:
 							Cl[0].mascota[0].set_edad(edad_masc);
 						}
 						else if (option2==2){
-							std::cout<<"===========================================\n";
-							std::cout<<"\tCliente "<<cont_cl<<"\t\n";
+							std::cout<<" ===========================================\n";
+							std::cout<<"\tCliente "<<Cl[0].get_Nombre_p()<<"\t\n";
 							std::cout<<" Nombre: "<<Cl[0].get_Nombre_p()<<std::endl;
 							std::cout<<" Apellido: "<<Cl[0].get_Apellido_p()<<std::endl;
 							std::cout<<" Cantidad de mascotas: "<<Cl[0].cant_mascota<<std::endl;
 							std::cout<<" Especie de la mascota: "<<Cl[0].mascota[0].get_especie()<<std::endl;
 							std::cout<<" Nombre de la mascota: "<<Cl[0].mascota[0].get_nombreM()<<std::endl;
 							std::cout<<" Edad: "<<Cl[0].mascota[0].get_edad()<<std::endl;
-							std::cout<<"===========================================\n";
+							std::cout<<" ===========================================\n";
 						}
 					}
 			        break;
@@ -548,6 +550,7 @@ public:
 					std::cin>>option2;
 					break;
 				case 4:
+					B=false;
 					break;
 				}
 			}
