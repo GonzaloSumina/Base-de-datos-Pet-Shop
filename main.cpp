@@ -173,7 +173,10 @@ public:
 									std::cout<<cont_Al;
 									std::cout<<"Ingrese el/los producto(s): ";
 									std::cin>>producto_y;
+									std::cout<<"Ingrese la cantidad: ";
+									std::cin>>cant_prod;
 									Al[i].set_marca(producto_y);
+									Ac[i].set_cantidad(cant_prod);
 								}
 							}
 						}
@@ -187,7 +190,7 @@ public:
 						std::string esp_masc;
 						int edad_masc;
 						int cant_masc;
-						int cont_cl=1;
+						int cont_cl=0;
 
 						std::cout<<" ===============================================\n";
 						std::cout<<"              Registro de clientes            \n";
@@ -220,27 +223,27 @@ public:
 								std::cout<<"Edad: ";
 								std::cin>>edad_masc;
 								std::cout<<" ===============================================\n";
-								Cl[0].mascota[i].set_nombreM(nom_masc);
-								Cl[0].mascota[i].set_especie(esp_masc);
-								Cl[0].mascota[i].set_edad(edad_masc);
+								Cl[cont_cl].mascota[i].set_nombreM(nom_masc);
+								Cl[cont_cl].mascota[i].set_especie(esp_masc);
+								Cl[cont_cl].mascota[i].set_edad(edad_masc);
 							}
-							Cl[0].set_Nombre_p(nom_cl);
-							Cl[0].set_Apellido_p(ap_cl);
-							Cl[0].cant_mascota=cant_masc;
+							Cl[cont_cl].set_Nombre_p(nom_cl);
+							Cl[cont_cl].set_Apellido_p(ap_cl);
+							Cl[cont_cl].cant_mascota=cant_masc;
 						}
 						else if (option2==2){
 							std::cout<<" ===========================================\n";
-							std::cout<<"\tCliente "<<Cl[0].get_Nombre_p()<<"\t\n";
-							std::cout<<" Nombre: "<<Cl[0].get_Nombre_p()<<std::endl;
-							std::cout<<" Apellido: "<<Cl[0].get_Apellido_p()<<std::endl;
-							std::cout<<" Cantidad de mascotas: "<<Cl[0].cant_mascota<<std::endl;
+							std::cout<<"\tCliente "<<Cl[cont_cl].get_Nombre_p()<<"\t\n";
+							std::cout<<" Nombre: "<<Cl[cont_cl].get_Nombre_p()<<std::endl;
+							std::cout<<" Apellido: "<<Cl[cont_cl].get_Apellido_p()<<std::endl;
+							std::cout<<" Cantidad de mascotas: "<<Cl[cont_cl].cant_mascota<<std::endl;
 							for (int i = 0; i < cant_masc; ++i){
 								std::cout<<" ===============================================\n";
 								std::cout<<"                    Mascota "<<i+1<<"             \n";
 								std::cout<<" ===============================================\n";
-								std::cout<<" Especie de la mascota: "<<Cl[0].mascota[0].get_especie()<<std::endl;
-								std::cout<<" Nombre de la mascota: "<<Cl[0].mascota[0].get_nombreM()<<std::endl;
-								std::cout<<" Edad: "<<Cl[0].mascota[0].get_edad()<<std::endl;
+								std::cout<<" Especie de la mascota: "<<Cl[cont_cl].mascota[i].get_especie()<<std::endl;
+								std::cout<<" Nombre de la mascota: "<<Cl[cont_cl].mascota[i].get_nombreM()<<std::endl;
+								std::cout<<" Edad: "<<Cl[cont_cl].mascota[i].get_edad()<<std::endl;
 								std::cout<<" ===========================================\n";
 							}
 						}
