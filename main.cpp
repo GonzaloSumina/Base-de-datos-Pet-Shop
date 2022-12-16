@@ -323,16 +323,13 @@ public:
 	const void Menu(){
 		std::string Correo;
 		std::string Contraseña;
-		std::string Name;
-		std::string LastName;
 		bool loop_=true;
 		while(loop_){
 			std::cout<<"|----------------------------------------------|\n";
 			std::cout<<"|                    PetShop                   |\n";
 			std::cout<<"|----------------------------------------------|\n";
 			std::cout<<"| (1) Iniciar sesion                           |\n";
-			std::cout<<"| (2) Registrarse                              |\n";
-			std::cout<<"| (3) Salir                                    |\n";
+			std::cout<<"| (2) Salir                                    |\n";
 			std::cout<<"|----------------------------------------------|\n";
 			std::cin>>option;
 			switch(option){
@@ -363,43 +360,6 @@ public:
 					}
 			        break;
 				case 2:
-					std::cout<<"|----------------------------------------------|\n";
-					std::cout<<"|              Tipo de usuario                 |\n";
-					std::cout<<"|----------------------------------------------|\n";
-					std::cout<<"| (1) Administrador                            |\n";
-					std::cout<<"| (2) Empleado                                 |\n";
-					std::cout<<"|----------------------------------------------|\n";
-					std::cin>>option2;
-					std::cout<<"|----------------------------------------------|\n";
-					std::cout<<"|                  Registrarse                 |\n";
-					std::cout<<"|----------------------------------------------|\n";
-					std::cout<<"| Ingrese correo: ";
-					std::cin>>Correo;
-					std::cout<<"| Ingrese contraseña: ";
-					std::cin>>Contraseña;
-					std::cout<<"| Ingrese Nombre: ";
-					std::cin>>Name;
-					std::cout<<"| Ingrese Apellido: ";
-					std::cin>>LastName;
-					std::cout<<"|----------------------------------------------|\n";
-					if (option2==1){
-						Ad[cont1].set_Usuario(Name);
-						Ad[cont1].set_Nombre_p(Name);
-						Ad[cont1].set_Apellido_p(LastName);
-						Ad[cont1].set_correo(Correo);
-						Ad[cont1].set_contrasena(Contraseña);
-						++cont1;
-					}
-					else if (option2==2){
-            			Em[cont2].set_Usuario(Name);
-						Em[cont2].set_Nombre_p(Name);
-						Em[cont2].set_Apellido_p(LastName);
-						Em[cont2].set_correo(Correo);
-						Em[cont2].set_contrasena(Contraseña);
-						++cont2;
-					}
-			        break;
-				case 3:
 					return;
 				default:
 					break;
@@ -407,6 +367,10 @@ public:
 		}
 	}
 	const void Menu_Administrador(){
+		std::string Correo;
+		std::string Contraseña;
+		std::string Name;
+		std::string LastName;
 		bool B=true;
 		while(B){
 			std::cout<<" =============================================\n";
@@ -416,7 +380,8 @@ public:
 			std::cout<<" (1) Registro de productos                    \n";
 			std::cout<<" (2) Registro de clientes                     \n";
 			std::cout<<" (3) Registro de ventas                       \n";
-			std::cout<<" (4) Salir                                    \n";
+			std::cout<<" (4) Registrar nuevos empleados               \n";
+			std::cout<<" (5) Salir                                    \n";
 			std::cout<<" =============================================\n";
 			std::cin>>option;
 			bool T=true;
@@ -550,6 +515,26 @@ public:
 					std::cin>>option2;
 					break;
 				case 4:
+					std::cout<<" ===============================================\n";
+					std::cout<<"                  Registrarse                 \n";
+					std::cout<<" ===============================================\n";
+					std::cout<<" Ingrese correo: ";
+					std::cin>>Correo;
+					std::cout<<" Ingrese contraseña: ";
+					std::cin>>Contraseña;
+					std::cout<<" Ingrese Nombre: ";
+					std::cin>>Name;
+					std::cout<<" Ingrese Apellido: ";
+					std::cin>>LastName;
+					std::cout<<" ===============================================\n";
+        			Em[cont2].set_Usuario(Name);
+					Em[cont2].set_Nombre_p(Name);
+					Em[cont2].set_Apellido_p(LastName);
+					Em[cont2].set_correo(Correo);
+					Em[cont2].set_contrasena(Contraseña);
+					++cont2;
+					break;
+				case 5:
 					B=false;
 					break;
 				}
@@ -566,8 +551,63 @@ public:
 		std::cout<<" (3) Salir                                    \n";
 		std::cout<<" ===============================================\n";
 		std::cin>>option;
+		bool W1=true;
 		switch(option){
 			case 1:
+				while (W1){
+					std::string nombre_cl_Ingresado;
+					std::string apellido_cl_Ingresado;
+					int cantidad_productos;
+
+					std::cout<<"Ingrese el nombre del cliente: ";
+					std::cin>>nombre_cl_Ingresado;
+					std::cout<<"Ingrese el apellido del cliente: ";
+					std::cin>>apellido_cl_Ingresado;
+					for (int i=0; i<10; ++i){
+						if(nombre_cl_Ingresado==Cl[i].get_Nombre_p() && apellido_cl_Ingresado==Cl[i].get_Apellido_p()){
+							std::cout<<"Ingrese la cantidad de productos a vender: ";
+							std::cin>>cantidad_productos;
+							std::cout<<"Ingrese los productos a vender: ";
+							for(int j=0; j<cantidad_productos; ++j){
+								std::string producto_cl_Ingresado;
+								std::string tipo_de_producto;
+								std::cout<<"Tipo de producto: (Alimento // Accesorio)";
+								std::cin>>tipo_de_producto;
+								if(tipo_de_producto=="Alimentos"){
+									std::cout<<"Nombre del producto: ";
+									std::cin>>producto_cl_Ingresado;
+									for(int k=0; k<cont_Al; ++k){
+										if(producto_cl_Ingresado==Al[k].get_marca()){
+
+										}
+										else{
+											std::cout<<"Este producto no se encuentra en el almacen";
+										}
+									}
+								}
+								else if (tipo_de_producto=="Accesorio"){
+									std::cout<<"Nombre del producto: ";
+									std::cin>>producto_cl_Ingresado;
+									for(int k=0; k<cont_Al; ++k){
+										if(producto_cl_Ingresado==Al[k].get_marca()){
+
+										}
+										else{
+											std::cout<<"Este producto no se encuentra en el almacen";
+										}
+									}
+								}
+								else {
+									std::cout<<"ERROR";
+								}
+							}
+						}
+						else{
+							std::cout<<"Los datos ingresados no coinciden con ningun cliente registrado";
+							W1=false;
+						}
+					}
+				}
 		        break;
 			case 2:
 		        break;
