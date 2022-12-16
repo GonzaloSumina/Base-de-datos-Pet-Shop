@@ -1,288 +1,15 @@
+#pragma once
 #include <iostream>
 #include <cstring>
-
-
-class Persona{
-protected:
-	std::string Nombre_p;
-	std::string Apellido_p;
-public:
-	Persona(std::string Nombre_p_="",std::string Apellido_p_= ""){
-		Nombre_p=Nombre_p_;
-		Apellido_p=Apellido_p_;
-	}
-	void set_Nombre_p(std::string Nombre_p_){
-		Nombre_p=Nombre_p_;
-		return;
-	}
-	std::string get_Nombre_p() const{
-		return Nombre_p;
-	}
-	void set_Apellido_p(std::string Apellido_p_){
-		Apellido_p=Apellido_p_;
-		return;
-	}
-	std::string get_Apellido_p() const{
-		return Apellido_p;
-	}
-};
-
-class Administrador : public Persona{
-private: 
-	std::string Usuario;
-	std::string correo;
-	std::string contrasena;
-public:
-	Administrador(std::string Nombre_p_="",std::string Apellido_p_= "", std::string Usuario_="",std::string correo_="", std::string contrasena_="") : Persona(Nombre_p_, Apellido_p_){
-		Usuario=Usuario_;
-		correo=correo_;
-		contrasena=contrasena_;
-	}
-	std::string get_Usuario() const{
-		return Usuario;
-	}
-	void set_Usuario(std::string Usuario_){
-		Usuario=Usuario_;
-	}
-	std::string get_correo(){
-		return correo;
-	}
-	void set_correo(std::string correo_){
-		correo=correo_;
-	}
-	std::string get_contrasena() const{
-		return contrasena;
-	}
-	void set_contrasena(std::string contrasena_){
-		contrasena=contrasena_;
-	}
-};
-class Empleado : public Persona{
-private: 
-	std::string Usuario;
-	std::string correo;
-	std::string contrasena;
-public:
-	Empleado(std::string Nombre_p_="",std::string Apellido_p_= "", std::string Usuario_="",std::string correo_="", std::string contrasena_="") : Persona(Nombre_p_, Apellido_p_){
-		Usuario=Usuario_;
-		correo=correo_;
-		contrasena=contrasena_;
-	}
-	std::string get_Usuario() const{
-		return Usuario;
-	}
-	void set_Usuario(std::string Usuario_){
-		Usuario=Usuario_;
-	}
-	std::string get_correo(){
-		return correo;
-	}
-	void set_correo(std::string correo_){
-		correo=correo_;
-	}
-	std::string get_contrasena() const{
-		return contrasena;
-	}
-	void set_contrasena(std::string contrasena_){
-		contrasena=contrasena_;
-	}
-};
-class Fecha{
-private:
-	int *fecha;
-	int dia, mes, año;
-public:
-	Fecha(){
-		fecha=nullptr;
-		fecha=new int [3];
-	}
-	int set_fecha(){
-		fecha[0]=dia;
-		fecha[1]=mes;
-		fecha[2]=año;
-		return 0;
-	}
-};
-
-class Mascota{
-private:
-	std::string nombreM;
-	Fecha F ;
-	int edad;
-	std::string especie;
-public:
-	Mascota(std::string nombre_m="", int edad_m=0, std::string especie_m=""){
-		nombreM = nombre_m;
-		edad = edad_m;
-		especie = especie_m;
-	}
-  	void print(){
-    	std::cout<<nombreM<<std::endl;
-    	std::cout<<edad<<std::endl;
-    	std::cout<<especie<<std::endl;
-  	}
-  	std::string get_nombreM() const{
-  		return nombreM;
-  	}
-  	void set_nombreM(std::string nombreM_){
-  		nombreM= nombreM_;
-  	}
-  	std::string get_especie() const{
-  		return especie;
-  	}
-  	void set_especie(std::string especie_){
-  		especie= especie_;
-  	}
-  	int get_edad() const{
-  		return edad;
-  	}
-  	void set_edad(int edad_){
-  		edad=edad_;
-  	}
-  	void set_fecha_nacimiento(){
-  		F.set_fecha();
-  	}
-};
-
-class Cliente : public Persona{
-public:
-	int compras;
-	int cant_mascota;
-	Mascota *mascota;
-	Cliente(std::string Nombre_p_="", std::string Apellido_p_= "", int compras_=0, int cant_mascota_=0) : Persona(Nombre_p_, Apellido_p_){
-		compras=compras_;
-		cant_mascota=cant_mascota_;
-		mascota = nullptr;
-		mascota=new Mascota[cant_mascota];
-	}
-};
-//
-class Detalle_Venta{	
-public:
-	int cantidad;
-	float precio;
-	Detalle_Venta(int cantidad_=0, float precio_=0){
-		cantidad=cantidad_;
-		precio=precio_;
-	}
-	~Detalle_Venta(){
-		cantidad=0;
-		precio=0;
-	}
-	int get_cantidad(){
-		return cantidad;
-	}
-	float get_precio(){
-		return precio;
-	}
-	void print(){
-		std::cout<<cantidad;
-		std::cout<<precio;
-	}
-};
-
-//Registro de productos
-class Producto{
-protected:
-	float precio;
-	//int ID;
-public:
-	Producto(float precio_=0/*, int ID_=0*/){
-		precio=precio_;
-		//ID=ID_;
-	}
-  	const float get_precio(){
-  		return precio;
-  	}
-  	const void set_precio(float precio_){
-  		precio=precio_;
-  	}
-  	/*const int get_ID(){
-  		return ID;
-  	}*/
-};
-
-class Alimentos : public Producto{
-private:
-	std::string marca;
-	int cantidad_;
-public:
-	Alimentos(float precio_=0/*, int ID_=0*/, std::string marca_="", int cantidad_=0) : Producto(precio_/*, ID_*/){
-		marca=marca_;
-		cantidad_=this->cantidad_;
-	}
-  	std::string get_marca() const {
-  		return marca;
-  	}
-  	void set_marca(std::string marca_){
-  		marca=marca_;
-  	}
-  	int get_cantidad() const {
-  		return cantidad_;
-  	}
-  	void set_cantidad(int cantidad_){
-  		cantidad_=this->cantidad_;
-  	}
-};
-
-class Accesorios : public Producto{
-private:
-	std::string tipo_accesorio;
-	int cantidad_;
-public:
-	Accesorios(float precio_=0/*, int ID_=0*/, std::string tipo_accesorio_="", int cantidad_=0) : Producto(precio_/*, ID_*/){
-		tipo_accesorio=tipo_accesorio_;
-		this->cantidad_=cantidad_;
-	}
-	void print(){
-    	std::cout<<tipo_accesorio<<std::endl;
-    	std::cout<<cantidad_<<std::endl;
-  	}
-  	std::string get_tipo_accesorio() const {
-  		return tipo_accesorio;
-  	}
-  	void set_tipo_accesorio(std::string tipo_accesorio_){
-  		tipo_accesorio=tipo_accesorio_;
-  	}
-  	int get_cantidad() const {
-  		return cantidad_;
-  	}
-  	void set_cantidad(int cantidad_){
-  		this->cantidad_=cantidad_;
-
-  	}
-
-};
-
-//Registro de Ventas
-class Venta{
-private:
-	float total;
-	Fecha F;
-public:
-	Venta(float total_=0){
-		total=total_;
-	}
-	~Venta(){
-		total=0;
-	}
-	float get_total(){
-		return total;
-	}
-	void set_total(float total_){
-		total=total_;
-	}
-	void print(){
-		//std::cout<<F.get_fecha;
-		std::cout<<total;
-	}
-};
-
-
-/*class Servicio_Calendario{
-private:
-	int calendario[7][12];
-};*/
+#include "Persona.h"
+#include "Administrador.h"
+#include "Empleado.h"
+#include "Mascota.h"
+#include "Cliente.h"
+#include "Detalle_Venta.h"
+#include "Producto.h"
+#include "Alimentos.h"
+#include "Accesorios.h"
 
 class Interfaz : public Persona{
 private:
@@ -321,6 +48,11 @@ public:
 		Cl=new Cliente[10];
 	}
 	const void Menu(){
+		Ad[0].set_Nombre_p("Gonzalo");
+		Ad[0].set_Apellido_p("Sumina");
+		Ad[0].set_Usuario("a1b2c3d4");
+		Ad[0].set_correo("abcd@ucsp.pe");
+		Ad[0].set_contrasena("1234");
 		std::string Correo;
 		std::string Contraseña;
 		bool loop_=true;
@@ -379,9 +111,8 @@ public:
 			std::cout<<" ¿Que desea revisar?                          \n";
 			std::cout<<" (1) Registro de productos                    \n";
 			std::cout<<" (2) Registro de clientes                     \n";
-			std::cout<<" (3) Registro de ventas                       \n";
-			std::cout<<" (4) Registrar nuevos empleados               \n";
-			std::cout<<" (5) Salir                                    \n";
+			std::cout<<" (3) Registrar nuevos empleados               \n";
+			std::cout<<" (4) Salir                                    \n";
 			std::cout<<" =============================================\n";
 			std::cin>>option;
 			bool T=true;
@@ -478,18 +209,24 @@ public:
 							std::cin>>ap_cl;
 							std::cout<<"Cantidad de mascotas: ";
 							std::cin>>cant_masc;
-							std::cout<<"Especie de la mascota: ";
-							std::cin>>esp_masc;
-							std::cout<<"Nombre de la mascota: ";
-							std::cin>>nom_masc;
-							std::cout<<"Edad: ";
-							std::cin>>edad_masc;
+							for (int i = 0; i < cant_masc; ++i){
+								std::cout<<" ===============================================\n";
+								std::cout<<"                    Mascota "<<i+1<<"             \n";
+								std::cout<<" ===============================================\n";
+								std::cout<<"Especie de la mascota: ";
+								std::cin>>esp_masc;
+								std::cout<<"Nombre de la mascota: ";
+								std::cin>>nom_masc;
+								std::cout<<"Edad: ";
+								std::cin>>edad_masc;
+								std::cout<<" ===============================================\n";
+								Cl[0].mascota[i].set_nombreM(nom_masc);
+								Cl[0].mascota[i].set_especie(esp_masc);
+								Cl[0].mascota[i].set_edad(edad_masc);
+							}
 							Cl[0].set_Nombre_p(nom_cl);
 							Cl[0].set_Apellido_p(ap_cl);
 							Cl[0].cant_mascota=cant_masc;
-							Cl[0].mascota[0].set_nombreM(nom_masc);
-							Cl[0].mascota[0].set_especie(esp_masc);
-							Cl[0].mascota[0].set_edad(edad_masc);
 						}
 						else if (option2==2){
 							std::cout<<" ===========================================\n";
@@ -497,24 +234,19 @@ public:
 							std::cout<<" Nombre: "<<Cl[0].get_Nombre_p()<<std::endl;
 							std::cout<<" Apellido: "<<Cl[0].get_Apellido_p()<<std::endl;
 							std::cout<<" Cantidad de mascotas: "<<Cl[0].cant_mascota<<std::endl;
-							std::cout<<" Especie de la mascota: "<<Cl[0].mascota[0].get_especie()<<std::endl;
-							std::cout<<" Nombre de la mascota: "<<Cl[0].mascota[0].get_nombreM()<<std::endl;
-							std::cout<<" Edad: "<<Cl[0].mascota[0].get_edad()<<std::endl;
-							std::cout<<" ===========================================\n";
+							for (int i = 0; i < cant_masc; ++i){
+								std::cout<<" ===============================================\n";
+								std::cout<<"                    Mascota "<<i+1<<"             \n";
+								std::cout<<" ===============================================\n";
+								std::cout<<" Especie de la mascota: "<<Cl[0].mascota[0].get_especie()<<std::endl;
+								std::cout<<" Nombre de la mascota: "<<Cl[0].mascota[0].get_nombreM()<<std::endl;
+								std::cout<<" Edad: "<<Cl[0].mascota[0].get_edad()<<std::endl;
+								std::cout<<" ===========================================\n";
+							}
 						}
 					}
 			        break;
 				case 3:
-					std::cout<<" ==============================================\n";
-					std::cout<<"              Registro de ventas              \n";
-					std::cout<<" ==============================================\n";
-					std::cout<<" (1) Visualizar historial                     \n";
-					std::cout<<" (2) Registrar una nueva compra               \n";
-					std::cout<<" (3) Regresar                                 \n";
-					std::cout<<" ==============================================\n";
-					std::cin>>option2;
-					break;
-				case 4:
 					std::cout<<" ===============================================\n";
 					std::cout<<"                  Registrarse                 \n";
 					std::cout<<" ===============================================\n";
@@ -534,7 +266,7 @@ public:
 					Em[cont2].set_contrasena(Contraseña);
 					++cont2;
 					break;
-				case 5:
+				case 4:
 					B=false;
 					break;
 				}
@@ -542,6 +274,8 @@ public:
 		}
 
 		const void Menu_Empleado(){
+		bool H=true;
+		while(H){
 		std::cout<<" ===============================================\n";
 		std::cout<<"     Bienvenido  "<<Em[0].get_Usuario()<<" |\n";
 		std::cout<<" ===============================================\n";
@@ -571,14 +305,22 @@ public:
 							for(int j=0; j<cantidad_productos; ++j){
 								std::string producto_cl_Ingresado;
 								std::string tipo_de_producto;
+								int unidades;
 								std::cout<<"Tipo de producto: (Alimento // Accesorio)";
 								std::cin>>tipo_de_producto;
 								if(tipo_de_producto=="Alimentos"){
 									std::cout<<"Nombre del producto: ";
 									std::cin>>producto_cl_Ingresado;
+									std::cout<<"Unidades:";
+									std::cin>>unidades;
 									for(int k=0; k<cont_Al; ++k){
+										Detalle_Venta Nueva_venta;
 										if(producto_cl_Ingresado==Al[k].get_marca()){
-
+											float Pre;
+											Al[k].set_precio(Pre);
+											Nueva_venta.cantidad = unidades;
+											Nueva_venta.total = unidades*Pre;
+											std::cout<<"TOTAL: "<<Nueva_venta.total<<std::endl;
 										}
 										else{
 											std::cout<<"Este producto no se encuentra en el almacen";
@@ -588,9 +330,16 @@ public:
 								else if (tipo_de_producto=="Accesorio"){
 									std::cout<<"Nombre del producto: ";
 									std::cin>>producto_cl_Ingresado;
-									for(int k=0; k<cont_Al; ++k){
-										if(producto_cl_Ingresado==Al[k].get_marca()){
-
+									std::cout<<"Unidades:";
+									std::cin>>unidades;
+									for(int k=0; k<cont_Ac; ++k){
+										Detalle_Venta Nueva_venta;
+										if(producto_cl_Ingresado==Ac[k].get_tipo_accesorio()){
+											float Pre;
+											Ac[k].set_precio(Pre);
+											Nueva_venta.cantidad = unidades;
+											Nueva_venta.total = unidades*Pre;
+											std::cout<<"TOTAL: "<<Nueva_venta.total<<std::endl;
 										}
 										else{
 											std::cout<<"Este producto no se encuentra en el almacen";
@@ -612,22 +361,11 @@ public:
 			case 2:
 		        break;
 			case 3:
+				H = false;
 				break;
 			default:
 				break;
 			}
 		}
-
+	}
 };
-int main() 
-{
-	Interfaz x;
-	x.Menu();
-	if(x.Tipo_Ad==true){
-		x.Menu_Administrador();
-	}
-	else{
-		x.Menu_Empleado();
-	}
-	return 0;
-}
